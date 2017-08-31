@@ -1,0 +1,9 @@
+/demo-ContosoFlowers/ContosoFlowers.BotAssets/bin/Debug/
+/demo-ContosoFlowers/ContosoFlowers.BotAssets/bin/Release/
+/demo-ContosoFlowers/ContosoFlowers.BotAssets/obj/
+/demo-ContosoFlowers/ContosoFlowers.Services/bin/
+/demo-ContosoFlowers/ContosoFlowers.Services/obj/
+/demo-ContosoFlowers/ContosoFlowers/bin
+*.user
+obj/
+packages/
