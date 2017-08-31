@@ -8,3 +8,5 @@
 obj/
 packages/
 *.suo
+.vs/
+bin/
