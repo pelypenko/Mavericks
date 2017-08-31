@@ -23,31 +23,50 @@
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                // The Configured IISExpressSSLPort property in this project file
-                const int ConfiguredHttpsPort = 44371;
-
-                var link = Url.Link("CheckOut", new { controller = "CheckOut", action = "Index" });
-                var uriBuilder = new UriBuilder(link)
+                var text = activity.Text.ToLower();
+                //show my requests
+                if ((text.Contains("get") || text.Contains("show")) && text.Contains("requests"))
                 {
-                    Scheme = Uri.UriSchemeHttps,
-                    Port = ConfiguredHttpsPort
-                };
-                var checkOutRouteUri = uriBuilder.Uri.ToString();
-
-                using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
-                {
-                    var dialog = scope.Resolve<IDialog<object>>(TypedParameter.From(checkOutRouteUri));
-                    await Conversation.SendAsync(activity, () => dialog);
+                    await Conversation.SendAsync(activity, () => new Dialogs.IntakeRequestsDialog());
                 }
             }
             else
             {
-                await this.HandleSystemMessage(activity);
+                HandleSystemMessage(activity);
             }
-
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
-        }
+        } 
+
+        //public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+        //{
+        //    if (activity.Type == ActivityTypes.Message)
+        //    {
+        //        // The Configured IISExpressSSLPort property in this project file
+        //        const int ConfiguredHttpsPort = 44371;
+
+        //        var link = Url.Link("CheckOut", new { controller = "CheckOut", action = "Index" });
+        //        var uriBuilder = new UriBuilder(link)
+        //        {
+        //            Scheme = Uri.UriSchemeHttps,
+        //            Port = ConfiguredHttpsPort
+        //        };
+        //        var checkOutRouteUri = uriBuilder.Uri.ToString();
+
+        //        using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+        //        {
+        //            var dialog = scope.Resolve<IDialog<object>>(TypedParameter.From(checkOutRouteUri));
+        //            await Conversation.SendAsync(activity, () => dialog);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        await this.HandleSystemMessage(activity);
+        //    }
+
+        //    var response = Request.CreateResponse(HttpStatusCode.OK);
+        //    return response;
+        //}
 
         private async Task HandleSystemMessage(Activity message)
         {
