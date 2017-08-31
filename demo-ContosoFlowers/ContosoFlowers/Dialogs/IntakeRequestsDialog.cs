@@ -19,15 +19,34 @@
         {
             var reply = context.MakeMessage();
 
+            var message = context.Activity.AsMessageActivity().Text;
+
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-
-            reply.Attachments = new List<Attachment>()
+            if (message.Contains("requests"))
             {
-                GetRequestState212(),
-                GetRequestState213(),
-                GetRequestState214()
-            };
-
+                reply.Attachments = new List<Attachment>()
+                {
+                    GetRequestState212(),
+                    GetRequestState213(),
+                    GetRequestState214()
+                };
+            }
+            else
+            {
+                if (message.Contains("IBM") || message.Contains("212"))
+                {
+                    reply.Attachments = new List<Attachment>() { GetRequestState212() };
+                }
+                else if (message.Contains("Apple") || message.Contains("213"))
+                {
+                    reply.Attachments = new List<Attachment>() { GetRequestState213() };
+                }
+                else if (message.Contains("Intapp") || message.Contains("214"))
+                {
+                    reply.Attachments = new List<Attachment>() { GetRequestState214() };
+                }
+            }
+                        
             await context.PostAsync(reply);
 
             context.Wait(this.MessageReceivedAsync);

@@ -25,7 +25,8 @@
             {
                 var text = activity.Text.ToLower();
                 //show my requests
-                if ((text.Contains("get") || text.Contains("show")) && text.Contains("requests"))
+                if ((text.Contains("get") || text.Contains("show") || text.Contains("browse")) 
+                    && text.Contains("request"))
                 {
                     await Conversation.SendAsync(activity, () => new Dialogs.IntakeRequestsDialog());
                 }
