@@ -48,7 +48,7 @@
                         
             await context.PostAsync(reply);
 
-            context.Wait(this.MessageReceivedAsync);
+            context.EndConversation("");
         }
 
         private static Attachment GetRequestState212()

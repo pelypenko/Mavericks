@@ -35,7 +35,7 @@
 
             await context.PostAsync(responce);
 
-            context.Wait(MessageReceivedAsync);
+            context.EndConversation("");
         }
     }
 }
