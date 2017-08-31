@@ -18,12 +18,11 @@
         public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var reply = context.MakeMessage();
-
             var message = context.Activity.AsMessageActivity().Text;
-
-            reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+                        
             if (message.Contains("requests"))
             {
+                reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                 reply.Attachments = new List<Attachment>()
                 {
                     GetRequestState212(),

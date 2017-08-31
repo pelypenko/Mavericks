@@ -15,29 +15,21 @@
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        /// <summary>
-        /// POST: api/Messages
-        /// Receive a message from a user and reply to it
-        /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                var text = activity.Text.ToLower();
-                //show my requests
-                if ((text.Contains("get") || text.Contains("show") || text.Contains("browse")) 
-                    && text.Contains("request"))
-                {
-                    await Conversation.SendAsync(activity, () => new Dialogs.IntakeRequestsDialog());
-                }
+                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
             }
             else
             {
-                HandleSystemMessage(activity);
+                this.HandleSystemMessage(activity);
             }
+
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
+
 
         private Activity HandleSystemMessage(Activity message)
         {
