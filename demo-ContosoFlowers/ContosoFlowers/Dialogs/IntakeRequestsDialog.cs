@@ -70,7 +70,7 @@
             var subtitile = sb.ToString();
 
             return GetThumbnailCard(title, string.Empty, subtitile,
-                new CardImage(url: "http://localhost:3979/image/r212.png"),
+                new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r212.png"),
                     new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/212"));
         }
 
@@ -93,7 +93,7 @@
             var subtitile = sb.ToString();
 
             return GetThumbnailCard(title, string.Empty, subtitile,
-                new CardImage(url: "http://localhost:3979/image/r213.png"),
+                new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r213.png"),
                     new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/213"));
         }
 
@@ -114,9 +114,9 @@
             sb.Append(Environment.NewLine + Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Current State", "CS");
             var subtitile = sb.ToString();
-
+            
             return GetThumbnailCard(title, string.Empty, subtitile,
-                new CardImage(url: "http://localhost:3979/image/r214.png"),
+                new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r214.png"),
                     new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/214"));
         }
         
