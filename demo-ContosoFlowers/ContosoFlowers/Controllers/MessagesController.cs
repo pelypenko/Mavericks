@@ -37,39 +37,9 @@
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
-        } 
+        }
 
-        //public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
-        //{
-        //    if (activity.Type == ActivityTypes.Message)
-        //    {
-        //        // The Configured IISExpressSSLPort property in this project file
-        //        const int ConfiguredHttpsPort = 44371;
-
-        //        var link = Url.Link("CheckOut", new { controller = "CheckOut", action = "Index" });
-        //        var uriBuilder = new UriBuilder(link)
-        //        {
-        //            Scheme = Uri.UriSchemeHttps,
-        //            Port = ConfiguredHttpsPort
-        //        };
-        //        var checkOutRouteUri = uriBuilder.Uri.ToString();
-
-        //        using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
-        //        {
-        //            var dialog = scope.Resolve<IDialog<object>>(TypedParameter.From(checkOutRouteUri));
-        //            await Conversation.SendAsync(activity, () => dialog);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        await this.HandleSystemMessage(activity);
-        //    }
-
-        //    var response = Request.CreateResponse(HttpStatusCode.OK);
-        //    return response;
-        //}
-
-        private async Task HandleSystemMessage(Activity message)
+        private Activity HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -78,14 +48,9 @@
             }
             else if (message.Type == ActivityTypes.ConversationUpdate)
             {
-                if (message.MembersAdded.Any(o => o.Id == message.Recipient.Id))
-                {
-                    var reply = message.CreateReply(Resources.RootDialog_Welcome_Message);
-
-                    ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
-
-                    await connector.Conversations.ReplyToActivityAsync(reply);
-                }
+                // Handle conversation state changes, like members being added and removed
+                // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
+                // Not available in all channels
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
@@ -99,6 +64,8 @@
             else if (message.Type == ActivityTypes.Ping)
             {
             }
+
+            return null;
         }
     }
 }

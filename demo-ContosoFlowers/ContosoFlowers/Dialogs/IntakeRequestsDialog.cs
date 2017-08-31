@@ -33,15 +33,15 @@
             }
             else
             {
-                if (message.Contains("IBM") || message.Contains("212"))
+                if (message.Contains("ibm") || message.Contains("212"))
                 {
                     reply.Attachments = new List<Attachment>() { GetRequestState212() };
                 }
-                else if (message.Contains("Apple") || message.Contains("213"))
+                else if (message.Contains("apple") || message.Contains("213"))
                 {
                     reply.Attachments = new List<Attachment>() { GetRequestState213() };
                 }
-                else if (message.Contains("Intapp") || message.Contains("214"))
+                else if (message.Contains("intapp") || message.Contains("214"))
                 {
                     reply.Attachments = new List<Attachment>() { GetRequestState214() };
                 }
