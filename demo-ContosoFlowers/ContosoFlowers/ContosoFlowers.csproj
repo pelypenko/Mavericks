@@ -178,8 +178,12 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\BookMeetingRequestsDialog.cs" />
     <Compile Include="Dialogs\HiDialog.cs" />
     <Compile Include="Dialogs\IntakeRequestsDialog.cs" />
+    <Compile Include="Dialogs\Meeting.cs" />
+    <Compile Include="Dialogs\MeetingTitleDialog.cs" />
+    <Compile Include="Dialogs\ResponsibleLawyersRequestsDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

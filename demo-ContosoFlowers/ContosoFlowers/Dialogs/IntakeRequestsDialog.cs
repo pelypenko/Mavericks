@@ -105,7 +105,7 @@
             var actions = new List<CardAction>()
             {
                 new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/212"),
-                new CardAction(ActionTypes.OpenUrl, "Status", value: "http://ec2-34-213-141-81.us-west-2.compute.amazonaws.com/cytoscape/demo.html?id=212")
+                new CardAction(ActionTypes.OpenUrl, "Status", value: "https://intapphack2017v3.blob.core.windows.net/cytoscape/demo.html?id=212")
             };
 
             return GetThumbnailCard(title, subtitle, "", image, actions);
@@ -134,7 +134,7 @@
             var actions = new List<CardAction>()
             {
                 new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/213"),
-                new CardAction(ActionTypes.OpenUrl, "Status", value: "http://ec2-34-213-141-81.us-west-2.compute.amazonaws.com/cytoscape/demo.html?id=213")
+                new CardAction(ActionTypes.OpenUrl, "Status", value: "https://intapphack2017v3.blob.core.windows.net/cytoscape/demo.html?id=213")
             };
 
             return GetThumbnailCard(title, subtitle, "", image, actions);
@@ -163,7 +163,7 @@
             var actions = new List<CardAction>()
             {
                 new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/214"),
-                new CardAction(ActionTypes.OpenUrl, "Status", value: "http://ec2-34-213-141-81.us-west-2.compute.amazonaws.com/cytoscape/demo.html?id=214")
+                new CardAction(ActionTypes.OpenUrl, "Status", value: "https://intapphack2017v3.blob.core.windows.net/cytoscape/demo.html?id=214")
             };
 
             return GetThumbnailCard(title, subtitle, "", image, actions);
