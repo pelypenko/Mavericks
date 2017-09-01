@@ -19,26 +19,36 @@
 
         public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            var message = await result;
-            var text = message.Text.ToLower();
+            var text = context.Activity.AsMessageActivity().Text.ToLower();
 
             if (text.Contains("get") || text.Contains("show") || text.Contains("browse") && text.Contains("request"))
             {
-                await context.Forward(new IntakeRequestsDialog(), null, message, CancellationToken.None);
+                //await context.Forward(new IntakeRequestsDialog(), this.ResumeAfterRequestDialog, text, CancellationToken.None);
+                context.Call(new IntakeRequestsDialog(), this.ResumeAfterRequestDialog);
             }
             else if ((new[] { "thanks", "thank you", "tnk", "hi", "hey", "hello", "good day" }).Contains(text))
             {
-                await context.Forward(new HiDialog(), null, message, CancellationToken.None);
+                //await context.Forward(new HiDialog(), this.ResumeAfterHiDialog, text, CancellationToken.None);
+                context.Call(new HiDialog(), this.ResumeAfterHiDialog);
             }
         }
 
-        private async Task ResumeAfterSupportDialog(IDialogContext context, IAwaitable<int> result)
+        private async Task ResumeAfterHiDialog(IDialogContext context, IAwaitable<string> result)
         {
-            var ticketNumber = await result;
+            var message = await result;
 
-            //await context.PostAsync($"Thanks for contacting our support team. Your ticket number is {ticketNumber}.");
+            //await context.PostAsync(message);
             context.Wait(this.MessageReceivedAsync);
         }
+
+        private async Task ResumeAfterRequestDialog(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var reply = await result;
+
+            //await context.PostAsync(reply);
+            context.Wait(this.MessageReceivedAsync);
+        }
+
     }
 
 }

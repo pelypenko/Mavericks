@@ -6,21 +6,17 @@
     using System.Threading.Tasks;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Connector;
+    using System.Threading;
 
     [Serializable]
-    public class IntakeRequestsDialog : IDialog<object>
+    public class IntakeRequestsDialog : IDialog<IMessageActivity>
     {
-        public async Task StartAsync(IDialogContext context)
-        {
-            context.Wait(this.MessageReceivedAsync);
-        }
-
-        public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        public Task StartAsync(IDialogContext context)
         {
             var reply = context.MakeMessage();
-            var message = context.Activity.AsMessageActivity().Text;
-                        
-            if (message.Contains("requests"))
+            var text = context.Activity.AsMessageActivity().Text.ToLower();
+
+            if (text.Contains("requests"))
             {
                 reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                 reply.Attachments = new List<Attachment>()
@@ -32,24 +28,59 @@
             }
             else
             {
-                if (message.Contains("ibm") || message.Contains("212"))
+                if (text.Contains("ibm") || text.Contains("212"))
                 {
                     reply.Attachments = new List<Attachment>() { GetRequestState212() };
                 }
-                else if (message.Contains("apple") || message.Contains("213"))
+                else if (text.Contains("apple") || text.Contains("213"))
                 {
                     reply.Attachments = new List<Attachment>() { GetRequestState213() };
                 }
-                else if (message.Contains("intapp") || message.Contains("214"))
+                else if (text.Contains("intapp") || text.Contains("214"))
                 {
                     reply.Attachments = new List<Attachment>() { GetRequestState214() };
                 }
             }
-                        
-            await context.PostAsync(reply);
 
-            context.EndConversation("");
+            context.PostAsync(reply);
+            context.Done(reply);
+            return Task.CompletedTask;
         }
+
+        //private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        //{
+        //    var reply = context.MakeMessage();
+        //    var text = context.Activity.AsMessageActivity().Text.ToLower();
+
+        //    if (text.Contains("requests"))
+        //    {
+        //        reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+        //        reply.Attachments = new List<Attachment>()
+        //        {
+        //            GetRequestState212(),
+        //            GetRequestState213(),
+        //            GetRequestState214()
+        //        };
+        //    }
+        //    else
+        //    {
+        //        if (text.Contains("ibm") || text.Contains("212"))
+        //        {
+        //            reply.Attachments = new List<Attachment>() { GetRequestState212() };
+        //        }
+        //        else if (text.Contains("apple") || text.Contains("213"))
+        //        {
+        //            reply.Attachments = new List<Attachment>() { GetRequestState213() };
+        //        }
+        //        else if (text.Contains("intapp") || text.Contains("214"))
+        //        {
+        //            reply.Attachments = new List<Attachment>() { GetRequestState214() };
+        //        }
+        //    }
+                        
+        //    await context.PostAsync(reply);
+        //    context.Done(reply);
+        //}
 
         private static Attachment GetRequestState212()
         {
@@ -67,9 +98,9 @@
             sb.AppendFormat("{0}: {1}", "Assigned to", "Administrator");
             sb.Append(Environment.NewLine + Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Current State", "AML");
-            var subtitile = sb.ToString();
+            var text = sb.ToString();
 
-            return GetHeroCard(title, string.Empty, subtitile,
+            return GetHeroCard(title, string.Empty, text,
                 new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r212.png"),
                     new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/212"));
         }
@@ -90,9 +121,9 @@
             sb.AppendFormat("{0}: {1}", "Assigned to", "Administrator");
             sb.Append(Environment.NewLine + Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Current State", "Preliminary Review");
-            var subtitile = sb.ToString();
+            var text = sb.ToString();
 
-            return GetHeroCard(title, string.Empty, subtitile,
+            return GetHeroCard(title, string.Empty, text,
                 new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r213.png"),
                     new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/213"));
         }
@@ -113,9 +144,9 @@
             sb.AppendFormat("{0}: {1}", "Assigned to", "Administrator");
             sb.Append(Environment.NewLine + Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Current State", "CS");
-            var subtitile = sb.ToString();
+            var text = sb.ToString();
             
-            return GetHeroCard(title, string.Empty, subtitile,
+            return GetHeroCard(title, string.Empty, text,
                 new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r214.png"),
                     new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/214"));
         }
