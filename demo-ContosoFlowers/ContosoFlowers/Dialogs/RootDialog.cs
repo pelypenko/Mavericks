@@ -21,7 +21,7 @@
         {
             var text = context.Activity.AsMessageActivity().Text.ToLower();
 
-            if (text.Contains("get") || text.Contains("show") || text.Contains("browse") && text.Contains("request"))
+            if ((text.Contains("get") || text.Contains("show") || text.Contains("browse")) && text.Contains("request"))
             {
                 //await context.Forward(new IntakeRequestsDialog(), this.ResumeAfterRequestDialog, text, CancellationToken.None);
                 context.Call(new IntakeRequestsDialog(), this.ResumeAfterRequestDialog);
