@@ -87,22 +87,28 @@
             var title = string.Format("{0}# {1}", "Request", "212");
 
             var sb = new StringBuilder();
-            sb.AppendFormat("0042 - IBM Inc");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("0042 - 0001 Legal support service");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("____________________________________________");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("{0}: {1}", "Created", "Thursday, August 31, 2017 11:29:09AM");
-            sb.Append(Environment.NewLine + Environment.NewLine);
+            sb.AppendFormat("042 IBM Inc");
+            sb.Append(Environment.NewLine);
+            sb.AppendFormat("001 Legal support service");
+            var subtitle = sb.ToString();
+
+            sb = new StringBuilder();
+            sb.AppendFormat("{0}: {1}", "Created", "31/08/2017");
+            sb.Append(Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Assigned to", "Administrator");
-            sb.Append(Environment.NewLine + Environment.NewLine);
+            sb.Append(Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Current State", "AML");
             var text = sb.ToString();
 
-            return GetHeroCard(title, string.Empty, text,
-                new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r212.png"),
-                    new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/212"));
+            var image = new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r212.png");
+
+            var actions = new List<CardAction>()
+            {
+                new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/212"),
+                new CardAction(ActionTypes.OpenUrl, "Status", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/212")
+            };
+
+            return GetThumbnailCard(title, subtitle, "", image, actions);
         }
 
         private static Attachment GetRequestState213()
@@ -110,22 +116,28 @@
             var title = string.Format("{0}# {1}", "Request", "213");
 
             var sb = new StringBuilder();
-            sb.AppendFormat("4534 - Apple Inc");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("4534 - 0003 Super important matter");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("____________________________________________");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("{0}: {1}", "Created", "Thursday, August 31, 2017 11:30:17 AM");
-            sb.Append(Environment.NewLine + Environment.NewLine);
+            sb.AppendFormat("011 Apple Inc");
+            sb.Append(Environment.NewLine);
+            sb.AppendFormat("003 Super important matter");
+            var subtitle = sb.ToString();
+
+            sb = new StringBuilder();
+            sb.AppendFormat("{0}: {1}", "Created", "31/08/2017");
+            sb.Append(Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Assigned to", "Administrator");
-            sb.Append(Environment.NewLine + Environment.NewLine);
+            sb.Append(Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Current State", "Preliminary Review");
             var text = sb.ToString();
 
-            return GetHeroCard(title, string.Empty, text,
-                new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r213.png"),
-                    new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/213"));
+            var image = new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r213.png");
+
+            var actions = new List<CardAction>()
+            {
+                new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/213"),
+                new CardAction(ActionTypes.OpenUrl, "Status", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/213")
+            };
+
+            return GetThumbnailCard(title, subtitle, "", image, actions);
         }
 
         private static Attachment GetRequestState214()
@@ -133,39 +145,45 @@
             var title = string.Format("{0}# {1}", "Request", "214");
 
             var sb = new StringBuilder();
-            sb.AppendFormat("0012 - Intapp Inc");
+            sb.AppendFormat("012 Intapp Inc");
             sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("0012 - 0023 Mavericks the best");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("____________________________________________");
-            sb.Append(Environment.NewLine + Environment.NewLine);
-            sb.AppendFormat("{0}: {1}", "Created", "Thursday, August 31, 2017 11:31:18 AM");
+            sb.AppendFormat("023 Mavericks the best");
+            var subtitle = sb.ToString();
+
+            sb = new StringBuilder();
+            sb.AppendFormat("{0}: {1}", "Created", "31/08/2017");
             sb.Append(Environment.NewLine + Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Assigned to", "Administrator");
             sb.Append(Environment.NewLine + Environment.NewLine);
             sb.AppendFormat("{0}: {1}", "Current State", "CS");
             var text = sb.ToString();
-            
-            return GetHeroCard(title, string.Empty, text,
-                new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r214.png"),
-                    new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/214"));
+
+            var image = new CardImage(url: "https://intapphack2017v3.blob.core.windows.net:443/imgs/r214.png");
+
+            var actions = new List<CardAction>()
+            {
+                new CardAction(ActionTypes.OpenUrl, "Go To Request", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/214"),
+                new CardAction(ActionTypes.OpenUrl, "Status", value: "https://wilco1.opendev.intapp.com/app/app/index.html#/requests/214")
+            };
+
+            return GetThumbnailCard(title, subtitle, "", image, actions);
         }
         
-        private static Attachment GetHeroCard(string title, string subtitle, string text, CardImage cardImage, CardAction cardAction)
+        private static Attachment GetHeroCard(string title, string subtitle, string text, CardImage cardImage, List<CardAction> cardActions)
         {
             var heroCard = new HeroCard
             {
                 Title = title,
                 Subtitle = subtitle,
                 Text = text,
-                Images = new List<CardImage>() { cardImage },
-                Buttons = new List<CardAction>() { cardAction },
+                //Images = new List<CardImage>() { cardImage },
+                Buttons = cardActions,
             };
 
             return heroCard.ToAttachment();
         }
 
-        private static Attachment GetThumbnailCard(string title, string subtitle, string text, CardImage cardImage, CardAction cardAction)
+        private static Attachment GetThumbnailCard(string title, string subtitle, string text, CardImage cardImage, List<CardAction> cardActions)
         {
             var heroCard = new ThumbnailCard
             {
@@ -173,10 +191,11 @@
                 Subtitle = subtitle,
                 Text = text,
                 Images = new List<CardImage>() { cardImage },
-                Buttons = new List<CardAction>() { cardAction },
+                Buttons = cardActions,
             };
 
             return heroCard.ToAttachment();
         }
+                
     }
 }
