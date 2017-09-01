@@ -1,0 +1,183 @@
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <title>cytoscape-dagre.js demo</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=0">
+
+    <script src="jquery-2.0.3.min.js"></script>
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+
+    <!-- for testing with local version of cytoscape.js -->
+    <!--<script src="../cytoscape.js/build/cytoscape.js"></script>-->
+
+    <script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.js"></script>
+    <script src="cytoscape-dagre.js"></script>
+
+    <style>
+      body {
+        font-family: helvetica;
+        font-size: 10px;
+      }
+
+      #cy {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 999;
+      }
+
+      h1 {
+        opacity: 0.5;
+        font-size: 1em;
+      }
+    </style>
+
+    <script>
+      $(function(){
+
+        var url = window.location.href;
+        var reqelem;
+
+        if (url.includes("212"))
+        {
+            reqelem = {
+            nodes: [
+              { data: { id: 'Start' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'Init' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'Preliminary Review' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'CS' } , style: { 'background-color': '#239023'  } },
+              { data: { id: 'AML' } , style: { 'background-color': 'red'  } },
+              { data: { id: 'Fin. Dep. Approval' } },
+              { data: { id: 'Finish' } },
+            ],
+            edges: [
+              { data: { source: 'Start', target: 'Init' },
+                  style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' } },
+              { data: { source: 'Init', target: 'Preliminary Review' },
+                 style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'Preliminary Review', target: 'Init' },
+                  style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'Preliminary Review', target: 'CS' },
+                 style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'CS', target: 'AML' },
+                 style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' } },
+              { data: { source: 'CS', target: 'Finish' },
+                 style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' } },
+              { data: { source: 'AML', target: 'Fin. Dep. Approval' } },
+              { data: { source: 'AML', target: 'Finish' } },
+              { data: { source: 'Fin. Dep. Approval', target: 'Finish' } }
+            ]
+          };
+        }
+        else if (url.includes("213"))
+        {
+          reqelem = {
+            nodes: [
+              { data: { id: 'Start' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'Init' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'Preliminary Review' }, style: { 'background-color': 'red'  } },
+              { data: { id: 'CS' } },
+              { data: { id: 'AML' } },
+              { data: { id: 'Fin. Dep. Approval' } },
+              { data: { id: 'Finish' } },
+            ],
+            edges: [
+              { data: { source: 'Start', target: 'Init' },
+                  style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' } },
+              { data: { source: 'Init', target: 'Preliminary Review' },
+                 style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'Preliminary Review', target: 'Init' },
+                 style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'Preliminary Review', target: 'CS' } },
+              { data: { source: 'CS', target: 'AML' } },
+              { data: { source: 'CS', target: 'Finish' } },
+              { data: { source: 'AML', target: 'Fin. Dep. Approval' } },
+              { data: { source: 'AML', target: 'Finish' } },
+              { data: { source: 'Fin. Dep. Approval', target: 'Finish' } }
+            ]
+          };
+        }
+        else if (url.includes("214"))
+        {
+          reqelem = {
+            nodes: [
+              { data: { id: 'Start' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'Init' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'Preliminary Review' }, style: { 'background-color': '#239023'  } },
+              { data: { id: 'CS' }, style: { 'background-color': 'red'  } },
+              { data: { id: 'AML' } },
+              { data: { id: 'Fin. Dep. Approval' } },
+              { data: { id: 'Finish' } },
+            ],
+            edges: [
+              { data: { source: 'Start', target: 'Init' },
+                  style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' } },
+              { data: { source: 'Init', target: 'Preliminary Review' },
+                 style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'Preliminary Review', target: 'Init' },
+                  style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'Preliminary Review', target: 'CS' },
+                  style: { 'line-color': '#6fdc6f', 'target-arrow-color': '#6fdc6f' }  },
+              { data: { source: 'CS', target: 'AML' } },
+              { data: { source: 'CS', target: 'Finish' } },
+              { data: { source: 'AML', target: 'Fin. Dep. Approval' } },
+              { data: { source: 'AML', target: 'Finish' } },
+              { data: { source: 'Fin. Dep. Approval', target: 'Finish' } }
+            ]
+          };
+        }
+
+        var cy = window.cy = cytoscape({
+          container: document.getElementById('cy'),
+
+          boxSelectionEnabled: false,
+          autounselectify: true,
+
+          layout: {
+            name: 'dagre'
+          },
+
+          style: [
+            {
+              selector: 'node',
+              style: {
+                'content': 'data(id)',
+                'text-opacity': 0.5,
+                'text-valign': 'center',
+                'text-halign': 'right',
+                'background-color': '#11479e'
+              }
+            },
+
+            {
+              selector: 'edge',
+              style: {
+                'width': 4,
+                'target-arrow-shape': 'triangle',
+                'line-color': '#9dbaea',
+                'target-arrow-color': '#9dbaea',
+                'curve-style': 'bezier'
+              }
+            }
+          ],
+
+          elements: reqelem
+        });
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>cytoscape-dagre demo</h1>
+
+    <div id="cy"></div>
+
+  </body>
+
+</html>
