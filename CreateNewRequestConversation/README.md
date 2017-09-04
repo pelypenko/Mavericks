@@ -1,4 +1,4 @@
-Create new request bot:
+Create new request slack bot:
 
 features:
 - create NCNM request

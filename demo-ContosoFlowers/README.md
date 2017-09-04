@@ -1,4 +1,5 @@
-Get my request bot:
+Get my request skype bot:
+(initially was based on ContosoFlowers demo bot)
 
 features:
 
