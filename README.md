@@ -1,4 +1,11 @@
 Intapp Hackatone 2017 (Kyiv)
+Repository of The Mavericks Team - Winners!!!
 
-MS Bot Framework based bot.
-Used Skype and Slack connectors.
+
+Skype & Slack bot. 
+
+Used:
+- Microsoft Bot Framework
+- Cytoscape.js
+- C#
+
